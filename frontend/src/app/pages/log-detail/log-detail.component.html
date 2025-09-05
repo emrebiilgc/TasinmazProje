@@ -1,0 +1,87 @@
+<div class="log-detail">
+  <header>
+    <h2>Log Detayları</h2>
+    <div class="menu-buttons">
+      <button class="menu-btn" [routerLink]="['/log-list']">Log İşlemleri</button>
+      <button class="menu-btn" [routerLink]="['/user-list']">Kullanıcı Listesi</button>
+      <button class="menu-btn" [routerLink]="['/property-list']">Mevcut Taşınmazlar Listesi</button>
+      <button class="logout-btn" (click)="logout()">Çıkış Yap</button>
+    </div>
+  </header>
+
+  <nav>
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="İşlem Tipi veya Kullanıcı ID ara..." />
+      <button class="search-btn" (click)="search()">
+        <i class="bi bi-search"></i>
+      </button>
+      <button class="search-btn" (click)="clearSearch()">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </div>
+
+    <div class="menu-buttons" style="margin-left:auto">
+      <button class="menu-btn print-button" (click)="printSelectedLogs()">
+        <i class="bi bi-printer"></i> Yazdır
+      </button>
+    </div>
+
+
+  </nav>
+
+  <div class="content">
+    <table>
+      <thead>
+      <tr>
+        <th></th>
+        <th>Durum</th>
+        <th>Kullanıcı ID</th>
+        <th>İşlem Tipi</th>
+        <th>Tarih/Saat</th>
+        <th>IP</th>
+        <th>Açıklama</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let log of pagedLogs">
+        <td>
+          <input type="checkbox" (change)="toggleSelection(log)" />
+        </td>
+        <td>{{ log.status ? 'Başarılı' : 'Başarısız' }}</td>
+        <td>{{ log.userId }}</td>
+        <td>{{ log.operation }}</td>
+        <td>{{ log.timestamp | date: 'short' }}</td>
+        <td>{{ log.ipAddress }}</td>
+        <td>{{ log.detail }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+
+
+    <div class="pagination">
+      <button class="pagination-btn" (click)="changePage(1)" [disabled]="currentPage === 1">«</button>
+      <button class="pagination-btn" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">‹</button>
+
+      <span class="current-page">{{ currentPage }} / {{ totalPages }}</span>
+
+      <button class="pagination-btn" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">›</button>
+      <button class="pagination-btn" (click)="changePage(totalPages)" [disabled]="currentPage === totalPages">»</button>
+
+      <div class="go-to-page">
+        <input type="number" [(ngModel)]="gotoPageNumber" min="1" [max]="totalPages" placeholder="Sayfa" />
+        <button class="go-btn" (click)="goToPage()">Git</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<app-confirm-modal
+  *ngIf="showConfirmModal"
+  [message]="confirmMessage"
+  (onConfirm)="confirmAction(); showConfirmModal = false"
+  (onCancel)="showConfirmModal = false">
+</app-confirm-modal>
+

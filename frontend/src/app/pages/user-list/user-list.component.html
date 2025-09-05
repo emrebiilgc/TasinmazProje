@@ -1,0 +1,106 @@
+<div class="user-list">
+  <header>
+    <h2>Kullanıcı Listesi</h2>
+    <div class="menu-buttons">
+      <button class="menu-btn" [routerLink]="['/log-list']">Log İşlemleri</button>
+      <button class="current-user-list-btn">Kullanıcı Listesi</button>
+      <button class="menu-btn" [routerLink]="['/property-list']">Mevcut Taşınmazlar Listesi</button>
+      <button class="logout-btn" (click)="logout()">Çıkış Yap</button>
+    </div>
+  </header>
+
+  <nav>
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Ad, Soyad veya E-Mail ara..." />
+      <button class="search-btn" (click)="search()">
+        <i class="bi bi-search"></i>
+      </button>
+      <button class="search-btn" (click)="clearSearch()">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </div>
+
+    <div class="action-buttons">
+      <button class="icon-btn tooltip-wrapper" [routerLink]="['/user-add']">
+        <i class="bi bi-plus-circle"></i>
+        <span class="tooltip">Yeni Kullanıcı Ekle</span>
+      </button>
+
+      <button class="icon-btn tooltip-wrapper" (click)="updateSelectedUser()">
+        <i class="bi bi-arrow-clockwise"></i>
+        <span class="tooltip">Seçilen Kullanıcıyı Güncelle</span>
+      </button>
+
+      <button class="icon-btn tooltip-wrapper" (click)="deleteSelectedUsers()">
+        <i class="bi bi-trash"></i>
+        <span class="tooltip">Seçilenleri Sil</span>
+      </button>
+
+      <button class="icon-btn tooltip-wrapper" (click)="reportSelectedUser()">
+        <i class="bi bi-file-earmark-text"></i>
+        <span class="tooltip">Seçilen Kullanıcıları Yazdır</span>
+      </button>
+
+      <button class="icon-btn tooltip-wrapper" (click)="reportAllUsers()">
+        <i class="bi bi-printer-fill"></i>
+        <span class="tooltip">Tüm Kullanıcıları Yazdır</span>
+      </button>
+    </div>
+
+
+
+
+  </nav>
+
+  <div class="content">
+    <table>
+      <thead>
+      <tr>
+        <th></th>
+        <th>AD</th>
+        <th>SOYAD</th>
+        <th>E-MAİL</th>
+        <th>ROL</th>
+        <th>ADRES</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of pagedUsers">
+        <td><input type="checkbox" (change)="onCheckboxChange(user.id, $event)" /></td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.address }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+
+
+    <div class="pagination">
+      <button class="pagination-btn" (click)="changePage(1)" [disabled]="currentPage === 1">«</button>
+      <button class="pagination-btn" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">‹</button>
+
+      <span class="current-page">{{ currentPage }} / {{ totalPages }}</span>
+
+      <button class="pagination-btn" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">›</button>
+      <button class="pagination-btn" (click)="changePage(totalPages)" [disabled]="currentPage === totalPages">»</button>
+
+      <div class="go-to-page">
+        <input type="number" [(ngModel)]="gotoPageNumber" min="1" [max]="totalPages" placeholder="Sayfa" />
+        <button class="go-btn" (click)="goToPage()">Git</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<app-confirm-modal
+  *ngIf="showConfirmModal"
+  [message]="confirmMessage"
+  (onConfirm)="confirmAction(); showConfirmModal = false"
+  (onCancel)="showConfirmModal = false">
+</app-confirm-modal>
+

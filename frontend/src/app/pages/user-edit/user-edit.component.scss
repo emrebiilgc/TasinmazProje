@@ -1,0 +1,284 @@
+header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.menu-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.menu-buttons button {
+  background: #636363;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-buttons button:hover {
+  background-color: #818181;
+}
+
+.logout-btn {
+  background-color: #e52241;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #c91d37;
+}
+
+.non_property {
+  background: #444;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+.form-group i {
+  position: absolute;
+  right: 10px;
+  color: #333;
+  font-size: 1.2em;
+}
+
+.ekle-btn:hover {
+  background-color: #1b5ba4;
+}
+i.error {
+  color: red;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.form-group i.error {
+  color: red !important;
+  animation: blink 1s infinite;
+}
+
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css');
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #3e3e3e;
+  width: 90%;
+  max-width: 1300px;
+  padding: 8px 20px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin: 20px auto 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+
+.menu-buttons .menu-btn {
+  background: #636363;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-buttons .menu-btn:hover {
+  background-color: #818181;
+}
+
+.menu-buttons .logout-btn {
+  background-color: #e52241;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-buttons .logout-btn:hover {
+  background-color: #c91d37;
+}
+
+.menu-buttons .non_property {
+  background-color: #636363;
+}
+
+
+nav {
+  margin-top: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  margin-top: 50px;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  padding-left: 50px;
+}
+
+.form-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  justify-content: space-between;
+  gap: 150px;
+}
+
+
+.left-container {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.right-container {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: stretch;
+  margin-left: 50px;
+}
+
+
+
+.form-group {
+  width: 100%;
+  max-width: none;
+}
+
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 16px;
+  background-color: #f5f5f5;
+}
+.adres-input {
+  width: 120% !important;
+  min-height: 170px;
+  padding: 14px 20px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  box-sizing: border-box;
+  max-width: 700px;
+  background-color: #f5f5f5;
+}
+
+
+
+
+.adres-icon {
+  position: absolute;
+  right: -30px;
+  top: 10px;
+  font-size: 1.5em;
+  color: black;
+}
+.ekle-btn {
+  width: 200px;
+  padding: 14px 20px;
+  background-color: #2e7dcb;
+  border: none;
+  border-radius: 25px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 40px;
+  align-self: center;
+}
+
+
+
+i.error {
+  color: red;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.form-group i.error {
+  color: red !important;
+  animation: blink 1s infinite;
+}
+
+.adres-icon.error {
+  color: red !important;
+  animation: blink 1s infinite;
+}
+
+.error-message {
+  background-color: #fdecea;
+  color: #f44336;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-left: 4px solid #f44336;
+  border-radius: 6px;
+  margin-top: 6px;
+  margin-left: 4px;
+  text-align: left;
+  max-width: 380px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+

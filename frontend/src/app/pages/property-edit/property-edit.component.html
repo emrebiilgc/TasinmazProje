@@ -1,0 +1,119 @@
+<header>
+  <h2>Taşınmaz Güncelle</h2>
+  <div class="menu-buttons">
+    <ng-container *ngIf="userRole === 'Admin'">
+      <button class="non_property" [routerLink]="['/log-list']">Log İşlemleri</button>
+      <button class="non_property" [routerLink]="['/user-list']">Kullanıcı Listesi</button>
+    </ng-container>
+    <button class="non_property" [routerLink]="['/property-list']">Mevcut Taşınmazlar Listesi</button>
+    <button class="logout-btn" (click)="logout()">Çıkış Yap</button>
+  </div>
+</header>
+
+<div class="form-container">
+  <form class="form-wrapper" (ngSubmit)="updateProperty()" #form="ngForm" novalidate>
+
+    <section class="section-1">
+      <div class="form-group">
+        <select class="form-control" [(ngModel)]="selectedCityId" name="city" (change)="onCityChange()" required>
+          <option [ngValue]="null" disabled>İl Seç</option>
+          <option *ngFor="let city of cities" [ngValue]="city.id">{{ city.name }}</option>
+        </select>
+        <i class="bi bi-info-circle" [class.error]="errorFields['city']"></i>
+      </div>
+      <div class="form-group">
+        <select class="form-control" [(ngModel)]="selectedDistrictId" name="district" (change)="onDistrictChange()" required>
+          <option [ngValue]="null" disabled>İlçe Seç</option>
+          <option *ngFor="let district of districts" [ngValue]="district.id">{{ district.name }}</option>
+        </select>
+        <i class="bi bi-info-circle" [class.error]="errorFields['district']"></i>
+      </div>
+
+      <div class="form-group">
+        <select class="form-control" [(ngModel)]="selectedNeighborhoodId" name="neighborhood" required>
+          <option [ngValue]="null" disabled>Mahalle Seç</option>
+          <option *ngFor="let neighborhood of neighborhoods" [ngValue]="neighborhood.id">{{ neighborhood.name }}</option>
+        </select>
+        <i class="bi bi-info-circle" [class.error]="errorFields['neighborhood']"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="ada" name="ada" placeholder="Ada" />
+        <i class="bi bi-info-circle" [class.error]="errorFields['ada']"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="parsel" name="parsel" placeholder="Parsel" />
+        <i class="bi bi-info-circle" [class.error]="errorFields['parsel']"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="nitelik" name="nitelik" placeholder="Nitelik" required />
+        <i class="bi bi-info-circle" [class.error]="errorFields['nitelik']"></i>
+      </div>
+    </section>
+
+    <section class="section-2">
+      <div class="form-group">
+        <textarea class="form-control adres-input" [(ngModel)]="adres" name="adres" placeholder="Adres" required></textarea>
+        <i class="bi bi-info-circle adres-icon" [class.error]="errorFields['adres']"></i>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="latitude" name="latitude" readonly placeholder="Enlem (Latitude)" />
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="longitude" name="longitude" readonly placeholder="Boylam (Longitude)" />
+      </div>
+    </section>
+
+    <section class="section-3">
+      <div id="map">
+
+        <div class="opacity-control">
+          <label for="opacityRange">Harita Opaklığı:</label>
+          <div class="slider-container">
+            <input
+              id="opacityRange"
+              type="range"
+              min="0"
+              max="1"
+              step="0.1"
+              [value]="1"
+              (input)="onOpacityChange($event)"
+            />
+            <span class="opacity-value">{{ currentOpacity }}</span>
+          </div>
+        </div>
+
+
+        <div class="layer-select">
+          <label for="layerSelect">Harita Katmanı:</label>
+          <div class="custom-select-wrapper">
+            <select id="layerSelect" (change)="onLayerChange($event)">
+              <option value="osm">OpenStreetMap</option>
+              <option value="google">Google Maps</option>
+            </select>
+            <span class="custom-arrow"></span>
+          </div>
+        </div>
+
+
+        <!-- Sol alt: Ölçek (otomatik dolacak) -->
+        <div id="scaleControl"></div>
+      </div>
+
+
+    </section>
+    <button type="submit" class="btn btn-primary ekle-btn">Güncelle</button>
+  </form>
+</div>
+
+<app-confirm-modal
+  *ngIf="showConfirmModal"
+  [message]="confirmMessage"
+  (onConfirm)="confirmAction(); showConfirmModal = false"
+  (onCancel)="showConfirmModal = false">
+</app-confirm-modal>
+
+

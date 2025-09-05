@@ -1,0 +1,38 @@
+<header>
+  Taşınmaz Yönetim Girişi
+</header>
+
+<div class="login-wrapper">
+  <form class="login-box" (ngSubmit)="onLogin()" novalidate>
+    <h2 class="login-title">Giriş Yap</h2>
+
+    <div class="input-container">
+      <span class="icon"><i class="bi bi-person-fill"></i></span>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="E-posta"
+        [(ngModel)]="email"
+        name="email"
+        required
+      />
+    </div>
+
+    <div class="input-container">
+      <span class="icon"><i class="bi bi-key-fill"></i></span>
+      <input
+        class="form-control"
+        type="password"
+        placeholder="Şifre"
+        [(ngModel)]="password"
+        name="password"
+        required
+      />
+    </div>
+
+    <a href="#" class="forgot-password">Şifremi Unuttum</a>
+
+    <button type="submit" class="btn-login">Giriş</button>
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+  </form>
+</div>

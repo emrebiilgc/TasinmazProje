@@ -1,0 +1,74 @@
+<div class="user-add">
+  <header>
+    <h2>Yeni Kullanıcı Ekle</h2>
+    <div class="menu-buttons">
+      <button class="non_property" [routerLink]="['/log-list']">Log İşlemleri</button>
+      <button class="non_property" [routerLink]="['/user-list']">Kullanıcı Listesi</button>
+      <button class="non_property" [routerLink]="['/property-list']">Mevcut Taşınmazlar Listesi</button>
+      <button class="logout-btn" (click)="logout()">Çıkış Yap</button>
+    </div>
+  </header>
+
+  <div class="form-container">
+    <form class="form-wrapper" (ngSubmit)="addUser()" #form="ngForm" novalidate>
+
+      <div class="left-container">
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="firstName" name="firstName" placeholder="Ad" required #firstNameRef="ngModel" />
+          <i class="bi bi-person-fill" [class.error]="firstNameRef.invalid && firstNameRef.touched || errorFields['firstName']"></i>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="lastName" name="lastName" placeholder="Soyad" required #lastNameRef="ngModel" />
+          <i class="bi bi-person-fill" [class.error]="lastNameRef.invalid && lastNameRef.touched || errorFields['lastName']"></i>
+        </div>
+
+        <div class="form-group">
+          <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="E-mail" required #emailRef="ngModel" />
+          <i class="bi bi-envelope-fill" [class.error]="emailRef.invalid && emailRef.touched || errorFields['email']"></i>
+
+          <div *ngIf="errorFields['email']" class="error-message">
+            Geçerli bir e-posta adresi giriniz. Örnek: kullanici@site.com
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control" [(ngModel)]="password" name="password" placeholder="Parola" required #passwordRef="ngModel" />
+          <i class="bi bi-lock-fill" [class.error]="passwordRef.invalid && passwordRef.touched || errorFields['password']"></i>
+
+          <div *ngIf="errorFields['password']" class="error-message">
+            Şifre en az 8 karakter olmalı, harf, rakam ve özel karakter içermelidir.
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <select class="form-control" [(ngModel)]="role" name="role" required #roleRef="ngModel">
+            <option value="" disabled selected>Rol</option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+          </select>
+          <i class="bi bi-person-badge-fill" [class.error]="roleRef.invalid && roleRef.touched || errorFields['role']"></i>
+        </div>
+      </div>
+
+      <div class="right-container">
+        <div class="form-group">
+          <textarea class="form-control adres-input" [(ngModel)]="address" name="address" placeholder="Adres" required #addressRef="ngModel"></textarea>
+          <i class="bi bi-geo-alt-fill adres-icon" [class.error]="addressRef.invalid && addressRef.touched || errorFields['address']"></i>
+        </div>
+
+        <button type="submit" class="btn btn-primary ekle-btn">Ekle</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<app-confirm-modal
+  *ngIf="showConfirmModal"
+  [message]="confirmMessage"
+  (onConfirm)="confirmAction(); showConfirmModal = false"
+  (onCancel)="showConfirmModal = false">
+</app-confirm-modal>
+

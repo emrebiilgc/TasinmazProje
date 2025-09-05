@@ -1,0 +1,148 @@
+<div class="property-list">
+  <header>
+    <h2>Taşınmaz Yönetim Sistemi</h2>
+    <div class="menu-buttons">
+      <button *ngIf="role === 'Admin'" class="menu-btn" [routerLink]="['/log-list']">Log İşlemleri</button>
+      <button *ngIf="role === 'Admin'" class="menu-btn" [routerLink]="['/user-list']">Kullanıcı İşlemleri</button>
+      <button class="current-property-list-btn">Mevcut Taşınmazlar Listesi</button>
+      <button class="logout-btn" (click)="logout()">Çıkış Yap</button>
+    </div>
+  </header>
+
+  <nav>
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Şehir, İlçe veya Mahalle ara..." />
+      <button class="search-btn" (click)="search()">
+        <i class="bi bi-search"></i>
+      </button>
+      <button class="search-btn" (click)="clearSearch()">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </div>
+
+    <div class="action-buttons">
+      <ng-container *ngIf="role !== 'Admin'">
+        <button class="icon-btn tooltip-wrapper" [routerLink]="['/property-add']">
+          <i class="bi bi-plus-circle"></i>
+          <span class="tooltip">Yeni Taşınmaz Ekle</span>
+        </button>
+        <button class="icon-btn tooltip-wrapper" (click)="updateSelectedProperty()">
+          <i class="bi bi-arrow-clockwise"></i>
+          <span class="tooltip">Seçilen Taşınmazı Güncelle</span>
+        </button>
+        <button class="icon-btn tooltip-wrapper" (click)="deleteSelectedProperties()">
+          <i class="bi bi-trash"></i>
+          <span class="tooltip">Seçilenleri Sil</span>
+        </button>
+      </ng-container>
+
+      <button class="icon-btn tooltip-wrapper" (click)="exportSelectedPropertyAsExcel()">
+        <i class="bi bi-file-earmark-text"></i>
+        <span class="tooltip">Seçilen Taşınmazları Yazdır</span>
+      </button>
+
+      <button class="icon-btn tooltip-wrapper" (click)="reportAllProperties()">
+        <i class="bi bi-printer-fill"></i>
+        <span class="tooltip">Tüm Taşınmazları Yazdır</span>
+      </button>
+    </div>
+
+
+  </nav>
+
+  <div class="content">
+    <table>
+      <thead>
+      <tr>
+        <th></th>
+        <th>İL</th>
+        <th>İLÇE</th>
+        <th>MAHALLE</th>
+        <th>ADA</th>
+        <th>PARSEL</th>
+        <th>NİTELİK</th>
+        <th>ADRES</th>
+        <th>ENLEM</th>
+        <th>BOYLAM</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let property of pagedProperties">
+        <td><input type="checkbox" (change)="onCheckboxChange(property.id, $event)" /></td>
+        <td>{{ property.cityName }}</td>
+        <td>{{ property.districtName }}</td>
+        <td>{{ property.neighborhoodName }}</td>
+        <td>{{ property.ada }}</td>
+        <td>{{ property.parsel }}</td>
+        <td>{{ property.nitelik }}</td>
+        <td>{{ property.adres }}</td>
+        <td>{{ property.latitude }}</td>
+        <td>{{ property.longitude }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <div class="pagination">
+      <button class="pagination-btn" (click)="changePage(1)" [disabled]="currentPage === 1">«</button>
+      <button class="pagination-btn" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">‹</button>
+      <span class="current-page">{{ currentPage }} / {{ totalPages }}</span>
+      <button class="pagination-btn" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">›</button>
+      <button class="pagination-btn" (click)="changePage(totalPages)" [disabled]="currentPage === totalPages">»</button>
+      <div class="go-to-page">
+        <input type="number" [(ngModel)]="gotoPageNumber" min="1" [max]="totalPages" placeholder="Sayfa" />
+        <button class="go-btn" (click)="goToPage()">Git</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+
+
+<!-- Harita -->
+<div id="map">
+
+  <div class="opacity-control">
+    <label for="opacityRange">Harita Opaklığı:</label>
+    <div class="slider-container">
+      <input
+        id="opacityRange"
+        type="range"
+        min="0"
+        max="1"
+        step="0.1"
+        [value]="1"
+        (input)="onOpacityChange($event)"
+      />
+      <span class="opacity-value">{{ currentOpacity }}</span>
+    </div>
+  </div>
+
+
+  <div class="layer-select">
+    <label for="layerSelect">Harita Katmanı:</label>
+    <div class="custom-select-wrapper">
+      <select id="layerSelect" (change)="onLayerChange($event)">
+        <option value="osm">OpenStreetMap</option>
+        <option value="google">Google Maps</option>
+      </select>
+      <span class="custom-arrow"></span>
+    </div>
+  </div>
+
+
+  <!-- Sol alt: Ölçek (otomatik dolacak) -->
+  <div id="scaleControl"></div>
+</div>
+
+
+
+
+<app-confirm-modal
+  *ngIf="showConfirmModal"
+  [message]="confirmMessage"
+  (onConfirm)="confirmAction(); showConfirmModal = false"
+  (onCancel)="showConfirmModal = false">
+</app-confirm-modal>
