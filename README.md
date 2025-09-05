@@ -76,6 +76,17 @@ TasinmazProje/
 
 ---
 
+### Summary
+
+This project is a full-stack real estate management system built with modern technologies:
+
+- **Backend**: ASP.NET Core RESTful API  
+- **Frontend**: Angular Single-Page Application  
+- **Database**: PostgreSQL  
+
+It delivers secure authentication, structured data management, and a clean layered architecture ready for production.
+
+
 ## How to Run
 
 📌 To run this project, make sure you have **.NET 8 SDK**, **Node.js**, and **PostgreSQL** installed.
@@ -132,12 +143,3 @@ That’s it — the system will be up with both API and SPA.
 
 ---
 
-### Summary
-
-This project is a full-stack real estate management system built with modern technologies:
-
-- **Backend**: ASP.NET Core RESTful API  
-- **Frontend**: Angular Single-Page Application  
-- **Database**: PostgreSQL  
-
-It delivers secure authentication, structured data management, and a clean layered architecture ready for production.
