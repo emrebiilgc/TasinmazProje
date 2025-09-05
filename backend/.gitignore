@@ -62,3 +62,10 @@ coverage/
 # --- Rider/Resharper ---
 *.DotSettings
 _ReSharper*/
+# IDE klasörleri
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
+
