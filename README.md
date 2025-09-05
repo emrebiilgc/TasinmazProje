@@ -91,10 +91,9 @@ It delivers secure authentication, structured data management, and a clean layer
 
 📌 To run this project, make sure you have **.NET 8 SDK**, **Node.js**, and **PostgreSQL** installed.
 
-###Instructions
+Instructions
 ```bash
 1) Backend (.NET Core)
-
 cd backend/TasinmazProje.Presentation
 # 1) Update appsettings.json with your PostgreSQL connection string and JWT key
 # 2) Apply EF Core migrations (creates tables)
