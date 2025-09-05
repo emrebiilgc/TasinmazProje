@@ -1,0 +1,6 @@
+@TasinmazProje_HostAddress = http://localhost:5098
+
+GET {{TasinmazProje_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

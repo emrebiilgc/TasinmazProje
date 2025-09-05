@@ -1,0 +1,64 @@
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- IDE / Editor ---
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# --- Build output ---
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+[Ll]ogs/
+TestResults/
+artifacts/
+*.cache/
+*.ilk
+*.pdb
+*.mdb
+*.log
+*.trx
+*.coverage
+*.coveragexml
+*.dsym/
+*.nupkg
+*.snupkg
+
+# --- ASP.NET / EF / Publish ---
+*.pubxml
+*.pubxml.user
+**/secrets.json
+**/staticwebassets/
+**/wwwroot/lib/
+
+# --- Config / Secrets ---
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+appsettings.Local.json
+appsettings.*.local.json
+.env
+.env.*
+
+# --- Node / Frontend ---
+node_modules/
+dist/
+.angular/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+coverage/
+.cache/
+.tmp/
+
+# --- Rider/Resharper ---
+*.DotSettings
+_ReSharper*/
