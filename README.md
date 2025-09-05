@@ -91,6 +91,8 @@ It delivers secure authentication, structured data management, and a clean layer
 
 📌 To run this project, make sure you have **.NET 8 SDK**, **Node.js**, and **PostgreSQL** installed.
 
+###Instructions
+```bash
 1) Backend (.NET Core)
 
 cd backend/TasinmazProje.Presentation
