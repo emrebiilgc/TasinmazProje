@@ -41,3 +41,11 @@ testem.log
 .DS_Store
 Thumbs.db
 README.md
+# IDE / kişisel
+.vscode/
+
+# test dosyaları
+*.spec.ts
+
+# .editorconfig
+
