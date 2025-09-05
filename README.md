@@ -132,7 +132,7 @@ That’s it — the system will be up with both API and SPA.
 
 ---
 
-## Summary
+### Summary
 
 This project is a full-stack real estate management system built with modern technologies:
 
